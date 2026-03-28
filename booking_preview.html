@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fare & Discount Preview Module</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="booking-preview">
+  <div class="container">
+    <section class="panel">
+      <h2 class="form-title">Preview Before Payment</h2>
+      <div id="previewMsg" class="msg"></div>
+
+      <div class="card">
+        <p><strong>Journey:</strong> <span id="previewJourney"></span></p>
+        <p><strong>Date Of Travel:</strong> <span id="previewTravelDate"></span></p>
+        <p><strong>Seats:</strong> <span id="previewSeats"></span></p>
+        <p><strong>Class:</strong> <span id="previewClass"></span></p>
+        <p><strong>Booking Date:</strong> <span id="previewBookingDate"></span></p>
+        <p><strong>Customer Category:</strong> <span id="previewCustomerCategory"></span></p>
+      </div>
+
+      <div class="card" id="offerSummary" style="margin-top: 10px;"></div>
+      <div class="card" id="discountBreakdown" style="margin-top: 10px;"></div>
+
+      <div class="actions">
+        <button id="continueToPaymentBtn" type="button">Proceed To Payment Module</button>
+        <button id="backSelectionBtn" type="button" class="secondary">Back To Flight Selection</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/security.js"></script>
+  <script src="js/core/ui.js"></script>
+  <script src="js/core/pricing.js"></script>
+  <script src="js/modules/fare-discount.module.js"></script>
+  <script src="js/modules/preview.module.js"></script>
+  <script src="js/app.bootstrap.js"></script>
+</body>
+</html>

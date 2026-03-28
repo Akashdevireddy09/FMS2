@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="customer">
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">FMS Customer Portal</div>
+      <div class="nav-links">
+        <button id="goCancellation" type="button" class="secondary">Cancellation & Refund</button>
+        <button id="logoutBtn" type="button" class="danger">Sign Out</button>
+      </div>
+    </div>
+
+    <div id="customerMsg" class="msg"></div>
+
+    <section id="dashboardSection" class="panel">
+      <h2 class="form-title">Welcome, <span id="welcomeName">Customer</span></h2>
+      <div class="kpi-grid">
+        <div class="kpi">
+          <div class="label">Available Flights</div>
+          <div id="kpiFlights" class="value">0</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Booked Tickets</div>
+          <div id="kpiBookings" class="value">0</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Total Spent</div>
+          <div id="kpiSpent" class="value">INR 0.00</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="goFlightSearch" type="button">Flight Search</button>
+        <button id="goMyBookings" type="button" class="secondary">My Bookings</button>
+      </div>
+      <p class="footer-note">Session expires after 3 minutes of inactivity.</p>
+    </section>
+  </div>
+
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/security.js"></script>
+  <script src="js/core/ui.js"></script>
+  <script src="js/modules/user-dashboard.module.js"></script>
+  <script src="js/app.bootstrap.js"></script>
+</body>
+</html>

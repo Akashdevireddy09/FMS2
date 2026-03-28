@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FMS Register</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="register">
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">Flight Management System</div>
+      <div class="nav-links">
+        <a href="index (1).html"><button type="button" class="secondary">Back To Sign In</button></a>
+      </div>
+    </div>
+
+    <section class="panel">
+      <h2 class="form-title">Customer Registration</h2>
+      <div id="registerMsg" class="msg"></div>
+
+      <form id="registerForm" class="form-grid" novalidate>
+        <div class="form-row">
+          <label for="newUserId">User Id <span class="req">*</span></label>
+          <input id="newUserId" type="number" title="Auto generated user id" readonly>
+        </div>
+
+        <div class="form-row">
+          <label for="userName">User Name <span class="req">*</span></label>
+          <input id="userName" type="text" title="Full name of customer" required>
+        </div>
+
+        <div class="form-row">
+          <label for="regPassword">Password <span class="req">*</span></label>
+          <input id="regPassword" type="password" title="Minimum 8 chars with uppercase, number and special character" required>
+        </div>
+
+        <div class="form-row">
+          <label for="customerCategory">Customer Category <span class="req">*</span></label>
+          <select id="customerCategory" title="Select membership category" required>
+            <option value="">Select</option>
+            <option value="Silver">Silver</option>
+            <option value="Gold">Gold</option>
+            <option value="Platinum">Platinum</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="phone">Phone <span class="req">*</span></label>
+          <input id="phone" type="tel" title="10-digit phone number" required>
+        </div>
+
+        <div class="form-row">
+          <label for="email">Email Id <span class="req">*</span></label>
+          <input id="email" type="email" title="Valid email address" required>
+        </div>
+
+        <div class="form-row">
+          <label for="address1">Address 1 <span class="req">*</span></label>
+          <input id="address1" type="text" title="Primary address line" required>
+        </div>
+
+        <div class="form-row">
+          <label for="address2">Address 2 <span class="req">*</span></label>
+          <input id="address2" type="text" title="Secondary address line" required>
+        </div>
+
+        <div class="form-row">
+          <label for="city">City <span class="req">*</span></label>
+          <input id="city" type="text" title="City name" required>
+        </div>
+
+        <div class="form-row">
+          <label for="state">State <span class="req">*</span></label>
+          <input id="state" type="text" title="State name" required>
+        </div>
+
+        <div class="form-row">
+          <label for="country">Country <span class="req">*</span></label>
+          <input id="country" type="text" title="Country name" required>
+        </div>
+
+        <div class="form-row">
+          <label for="zipCode">Zip Code <span class="req">*</span></label>
+          <input id="zipCode" type="text" title="5 to 10 digit zip code" required>
+        </div>
+
+        <div class="form-row full">
+          <label for="dob">Date Of Birth <span class="req">*</span></label>
+          <input id="dob" type="date" title="Date of birth" required>
+        </div>
+
+        <div class="form-row full actions">
+          <button type="submit">Register</button>
+          <a href="index (1).html"><button type="button" class="secondary">Cancel</button></a>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/security.js"></script>
+  <script src="js/core/ui.js"></script>
+  <script src="js/modules/authentication.module.js"></script>
+  <script src="js/app.bootstrap.js"></script>
+</body>
+</html>

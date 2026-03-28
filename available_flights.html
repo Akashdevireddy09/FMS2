@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Flights Module</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="available-flights">
+  <div class="container">
+    <section class="panel">
+      <div class="flight-topbar">
+        <h2 class="form-title">Available Flights Module</h2>
+        <button id="toggleFiltersBtn" type="button" class="secondary filter-toggle-btn" aria-expanded="false" aria-controls="filterSidebar" aria-label="Show filters" title="Show filters">
+          <img src="assets/filter-icon.svg" alt="Filter" class="filter-btn-icon">
+        </button>
+      </div>
+      <div class="flight-layout filters-hidden" id="flightLayout">
+        <div class="flight-results-wrap">
+          <div id="availableFlightsList"></div>
+        </div>
+
+        <aside class="flight-sidebar card" id="filterSidebar">
+          <div class="section-title">Filters</div>
+          <div class="form-row">
+            <label for="fareMin">Min Fare (INR)</label>
+            <input id="fareMin" type="number" min="0" step="100" placeholder="0">
+          </div>
+          <div class="form-row">
+            <label for="fareMax">Max Fare (INR)</label>
+            <input id="fareMax" type="number" min="0" step="100" placeholder="10000">
+          </div>
+          <div class="form-row">
+            <label>Stops</label>
+            <label class="inline-choice"><input id="stopNonStop" type="checkbox" checked> Non-stop</label>
+            <label class="inline-choice"><input id="stopOne" type="checkbox" checked> 1 Stop</label>
+          </div>
+          <div class="form-row">
+            <label>Airlines</label>
+            <div id="airlineFilterList"></div>
+          </div>
+          <div class="actions">
+            <button id="applyFiltersBtn" type="button">Apply Filters</button>
+            <button id="clearFiltersBtn" type="button" class="secondary">Clear</button>
+          </div>
+        </aside>
+      </div>
+      <div class="actions">
+        <button id="backSearchBtn" type="button" class="secondary">Back To Search</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/security.js"></script>
+  <script src="js/core/ui.js"></script>
+  <script src="js/modules/available-flights.module.js"></script>
+  <script src="js/app.bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Selection Module</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="flight-selection">
+  <div class="container">
+    <section class="panel">
+      <h2 class="form-title">Flight Selection Module</h2>
+      <div id="flightSelectionMsg" class="msg"></div>
+      <p id="selectedFlightInfo" class="muted"></p>
+
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="seatCount">Number Of Seats <span class="req">*</span></label>
+          <input id="seatCount" type="number" min="1" max="9">
+        </div>
+        <div class="form-row">
+          <label for="seatClass">Seat Category <span class="req">*</span></label>
+          <select id="seatClass">
+            <option value="Economy">Economy</option>
+            <option value="Executive">Executive</option>
+            <option value="Business">Business</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="buildSeatMapBtn" type="button" class="secondary">Generate Seat Map</button>
+      </div>
+
+      <div id="seatMap" class="seat-map"></div>
+      <p id="seatChosen" class="muted">No seats selected</p>
+
+      <div id="passengerDetails"></div>
+
+      <div class="actions">
+        <button id="continuePreviewBtn" type="button">Continue To Discount Preview</button>
+        <button id="backAvailableFlightsBtn" type="button" class="secondary">Back To Available Flights</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/security.js"></script>
+  <script src="js/core/ui.js"></script>
+  <script src="js/core/pricing.js"></script>
+  <script src="js/modules/flight-selection.module.js"></script>
+  <script src="js/app.bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="admin">
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">FMS Admin Portal</div>
+      <div class="nav-links">
+        <button id="tabCarrier" type="button" class="secondary">Carrier Management</button>
+        <button id="tabFlight" type="button" class="secondary">Flight Management</button>
+        <button id="tabSchedule" type="button" class="secondary">Flight Schedule</button>
+        <button id="tabUsers" type="button" class="secondary">User Management</button>
+        <button id="tabAnalytics" type="button" class="secondary">Analytics</button>
+        <button id="tabAudit" type="button" class="secondary">Audit Trail</button>
+        <span class="muted">Signed in as <strong id="adminName">Admin</strong></span>
+        <button id="adminLogoutBtn" type="button" class="danger">Sign Out</button>
+      </div>
+    </div>
+
+    <div id="adminMsg" class="msg"></div>
+
+    <section id="carrierSection" class="panel">
+      <h2 class="form-title">Carrier Management</h2>
+      <div class="form-grid">
+        <div class="form-row"><label>Carrier Id (auto for add)</label><input id="carrierId" type="number" readonly></div>
+        <div class="form-row"><label>Carrier Name</label><input id="carrierName"></div>
+        <div class="form-row"><label>Discount 30 Days</label><input id="discount30" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Discount 60 Days</label><input id="discount60" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Discount 90 Days</label><input id="discount90" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Bulk Discount</label><input id="bulkBookingDiscount" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Refund 2 Days</label><input id="refund2Days" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Refund 10 Days</label><input id="refund10Days" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Refund 20+ Days</label><input id="refund20Days" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Silver Discount</label><input id="silverDiscount" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Gold Discount</label><input id="goldDiscount" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Platinum Discount</label><input id="platinumDiscount" type="number" min="0" max="100"></div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Carrier Id</th>
+            <th>Carrier Name</th>
+            <th>30 Days Discount</th>
+            <th>60 Days Discount</th>
+            <th>90 Days Discount</th>
+            <th>Bulk Discount</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody id="carrierBody"></tbody>
+      </table>
+      <div class="actions">
+        <button id="addCarrierBtn" type="button">Add Carrier</button>
+        <button id="editCarrierBtn" type="button" class="secondary">Edit Carrier</button>
+        <button id="deleteCarrierBtn" type="button" class="danger">Delete Carrier(s)</button>
+      </div>
+      <p class="footer-note">Use radio button for edit and checkbox for one or multiple delete operations.</p>
+    </section>
+
+    <section id="flightSection" class="panel hidden">
+      <h2 class="form-title">Flight Management</h2>
+      <div class="form-grid">
+        <div class="form-row"><label>Carrier</label><select id="flightCarrierId"></select></div>
+        <div class="form-row"><label>Origin</label><input id="origin"></div>
+        <div class="form-row"><label>Destination</label><input id="destination"></div>
+        <div class="form-row"><label>Air Fare</label><input id="airFare" type="number"></div>
+        <div class="form-row"><label>Economy Seats (>=20)</label><input id="seatEconomy" type="number" min="20"></div>
+        <div class="form-row"><label>Business Seats (>=10)</label><input id="seatBusiness" type="number" min="10"></div>
+        <div class="form-row"><label>Executive Seats (>=5)</label><input id="seatExecutive" type="number" min="5"></div>
+      </div>
+      <div class="actions">
+        <button id="saveFlightBtn" type="button">Save Flight</button>
+        <button id="deleteFlightBtn" type="button" class="danger">Delete Selected Flight(s)</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Delete</th>
+            <th>Flight Id</th>
+            <th>Carrier</th>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Air Fare</th>
+            <th>Economy</th>
+            <th>Business</th>
+            <th>Executive</th>
+          </tr>
+        </thead>
+        <tbody id="flightBody"></tbody>
+      </table>
+    </section>
+
+    <section id="scheduleSection" class="panel hidden">
+      <h2 class="form-title">Flight Schedule Management</h2>
+      <div class="form-grid">
+        <div class="form-row"><label>Flight</label><select id="scheduleFlightId"></select></div>
+        <div class="form-row"><label>Date Of Travel</label><input id="scheduleDate" type="date"></div>
+      </div>
+      <div class="actions">
+        <button id="saveScheduleBtn" type="button">Save Schedule</button>
+        <button id="deleteScheduleBtn" type="button" class="danger">Delete Selected Schedule(s)</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Delete</th>
+            <th>Schedule Id</th>
+            <th>Flight Id</th>
+            <th>Date</th>
+            <th>Business Booked</th>
+            <th>Economy Booked</th>
+            <th>Executive Booked</th>
+          </tr>
+        </thead>
+        <tbody id="scheduleBody"></tbody>
+      </table>
+    </section>
+
+    <section id="userSection" class="panel hidden">
+      <h2 class="form-title">User Management</h2>
+      <div class="actions">
+        <input id="userSearch" placeholder="Search by id, name, email">
+        <button id="userSearchBtn" type="button">Search</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>User Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Bookings</th>
+            <th>Toggle Status</th>
+            <th>Upgrade Category</th>
+          </tr>
+        </thead>
+        <tbody id="userBody"></tbody>
+      </table>
+    </section>
+
+    <section id="analyticsSection" class="panel hidden">
+      <h2 class="form-title">Analytics & Inventory</h2>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="label">Total Bookings</div><div id="analyticsTotalBookings" class="value">0</div></div>
+        <div class="kpi"><div class="label">Revenue</div><div id="analyticsRevenue" class="value">INR 0.00</div></div>
+        <div class="kpi"><div class="label">Cancelled</div><div id="analyticsCancelled" class="value">0</div></div>
+      </div>
+      <h3 class="section-title" style="margin-top:12px;">Real-Time Seat Inventory View</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Schedule Id</th>
+            <th>Flight Id</th>
+            <th>Route</th>
+            <th>Date</th>
+            <th>Economy</th>
+            <th>Business</th>
+            <th>Executive</th>
+          </tr>
+        </thead>
+        <tbody id="inventoryBody"></tbody>
+      </table>
+    </section>
+
+    <section id="auditSection" class="panel hidden">
+      <h2 class="form-title">Admin Audit Trail</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Admin Id</th>
+            <th>Action</th>
+            <th>Entity</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody id="auditBody"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/security.js"></script>
+  <script src="js/core/ui.js"></script>
+  <script src="js/modules/admin-dashboard-flight-management.module.js"></script>
+  <script src="js/app.bootstrap.js"></script>
+</body>
+</html>

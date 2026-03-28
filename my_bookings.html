@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Bookings Module</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="my-bookings">
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">FMS Customer Portal</div>
+      <div class="nav-links">
+        <a href="customer_dashboard.html"><button type="button" class="secondary">Back To Dashboard</button></a>
+      </div>
+    </div>
+
+    <section class="panel">
+      <h2 class="form-title">My Bookings</h2>
+      <div id="myBookingsMsg" class="msg"></div>
+
+      <div class="kpi-grid">
+        <div class="kpi">
+          <div class="label">Upcoming</div>
+          <div id="kpiUpcoming" class="value">0</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Past</div>
+          <div id="kpiPast" class="value">0</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Cancelled</div>
+          <div id="kpiCancelled" class="value">0</div>
+        </div>
+      </div>
+
+      <div class="actions booking-filter-bar">
+        <button id="filterAll" type="button" class="secondary">All</button>
+        <button id="filterUpcoming" type="button" class="secondary">Upcoming</button>
+        <button id="filterPast" type="button" class="secondary">Past</button>
+        <button id="filterCancelled" type="button" class="secondary">Cancelled</button>
+        <button id="filterPending" type="button" class="secondary">Pending</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Booking Id</th>
+            <th>Journey</th>
+            <th>Date</th>
+            <th>Seat Category</th>
+            <th>Seats</th>
+            <th>Status</th>
+            <th>Amount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="myBookingsBody"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/security.js"></script>
+  <script src="js/core/ui.js"></script>
+  <script src="js/modules/my-bookings.module.js"></script>
+  <script src="js/app.bootstrap.js"></script>
+</body>
+</html>

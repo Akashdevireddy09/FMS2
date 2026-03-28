@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmation Module</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="booking-confirmation">
+  <div class="container">
+    <section class="panel">
+      <h2 class="form-title">Booking Confirmation Module</h2>
+      <div id="bookingSuccessMsg" class="msg"></div>
+      <div class="card">
+        <p><strong>Booking Id:</strong> <span id="successRef"></span></p>
+        <p><strong>Journey:</strong> <span id="successJourney"></span></p>
+        <p><strong>Date Of Travel:</strong> <span id="successDate"></span></p>
+        <p><strong>No Of Passengers:</strong> <span id="successPassengers"></span></p>
+        <p><strong>Passenger Names:</strong> <span id="successNames"></span></p>
+        <p><strong>Seat Numbers:</strong> <span id="successSeats"></span></p>
+        <p><strong>Journey Duration:</strong> <span id="successDuration"></span></p>
+        <p><strong>Booking Status:</strong> <span id="successStatus"></span></p>
+        <p><strong>Final Amount Paid:</strong> INR <span id="successAmount"></span></p>
+      </div>
+      <div class="actions">
+        <a href="customer_dashboard.html"><button type="button">Go To Customer Dashboard</button></a>
+        <a href="cancellation_refund.html"><button type="button" class="secondary">Go To Cancellation Module</button></a>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/security.js"></script>
+  <script src="js/core/ui.js"></script>
+  <script src="js/modules/booking-confirmation.module.js"></script>
+  <script src="js/app.bootstrap.js"></script>
+</body>
+</html>

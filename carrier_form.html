@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrier Form</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="carrier-form">
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">FMS Admin Portal</div>
+      <div class="nav-links">
+        <a href="admin_dashboard.html"><button type="button" class="secondary">Back To Carriers</button></a>
+      </div>
+    </div>
+
+    <section class="panel">
+      <h2 id="carrierFormTitle" class="form-title">Add Carrier</h2>
+      <div id="carrierFormMsg" class="msg"></div>
+
+      <form id="carrierForm" class="form-grid" novalidate>
+        <div class="form-row">
+          <label for="carrierId">Carrier Id <span class="req">*</span></label>
+          <input id="carrierId" type="number" readonly>
+        </div>
+
+        <div class="form-row">
+          <label for="carrierName">Carrier Name <span class="req">*</span></label>
+          <input id="carrierName" title="Carrier name" required>
+        </div>
+
+        <div class="form-row">
+          <label for="discount30">Discount Percentage Thirty Days Advance Booking <span class="req">*</span></label>
+          <input id="discount30" type="number" min="0" max="100" title="0 to 100" required>
+        </div>
+
+        <div class="form-row">
+          <label for="discount60">Discount Percentage Sixty Days Advance Booking <span class="req">*</span></label>
+          <input id="discount60" type="number" min="0" max="100" title="0 to 100" required>
+        </div>
+
+        <div class="form-row">
+          <label for="discount90">Discount Percentage Ninety Days Advance Booking <span class="req">*</span></label>
+          <input id="discount90" type="number" min="0" max="100" title="0 to 100" required>
+        </div>
+
+        <div class="form-row">
+          <label for="bulkBookingDiscount">Bulk Booking Discount <span class="req">*</span></label>
+          <input id="bulkBookingDiscount" type="number" min="0" max="100" title="0 to 100" required>
+        </div>
+
+        <div class="form-row">
+          <label for="refund2Days">Refund Percentage For Ticket Cancellation 2 Days Before Travel Date <span class="req">*</span></label>
+          <input id="refund2Days" type="number" min="0" max="100" title="0 to 100" required>
+        </div>
+
+        <div class="form-row">
+          <label for="refund10Days">Refund Percentage For Ticket Cancellation 10 Days Before Travel Date <span class="req">*</span></label>
+          <input id="refund10Days" type="number" min="0" max="100" title="0 to 100" required>
+        </div>
+
+        <div class="form-row">
+          <label for="refund20Days">Refund Percentage For Ticket Cancellation 20 Days Or More Before Travel Date <span class="req">*</span></label>
+          <input id="refund20Days" type="number" min="0" max="100" title="0 to 100" required>
+        </div>
+
+        <div class="form-row">
+          <label for="silverDiscount">Silver User Discount <span class="req">*</span></label>
+          <input id="silverDiscount" type="number" min="0" max="100" title="0 to 100" required>
+        </div>
+
+        <div class="form-row">
+          <label for="goldDiscount">Gold User Discount <span class="req">*</span></label>
+          <input id="goldDiscount" type="number" min="0" max="100" title="0 to 100" required>
+        </div>
+
+        <div class="form-row">
+          <label for="platinumDiscount">Platinum User Discount <span class="req">*</span></label>
+          <input id="platinumDiscount" type="number" min="0" max="100" title="0 to 100" required>
+        </div>
+
+        <div class="form-row full actions">
+          <button type="submit">Save Carrier</button>
+          <button id="cancelCarrierBtn" type="button" class="secondary">Cancel</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/security.js"></script>
+  <script src="js/core/ui.js"></script>
+  <script src="js/app.bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>FMS Sign In</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="login">
+	<div class="auth-wrap">
+		<section class="hero-box panel">
+			<h1>Flight Management System</h1>
+			<p>
+				One integrated static website for registration, secure sign-in, customer booking flow,
+				admin carrier management, and payment completion.
+			</p>
+			<p class="footer-note">Demo Credentials: Admin 1001 / Admin@123 and Customer 1002 / Customer@123</p>
+		</section>
+
+		<section class="panel">
+			<h2 class="form-title">Customer/Admin Sign In</h2>
+			<div id="loginMsg" class="msg"></div>
+
+			<form id="loginForm" novalidate>
+				<div class="form-row">
+					<label for="userId">User Id <span class="req">*</span></label>
+					<input id="userId" type="number" title="Unique numeric user id" required>
+				</div>
+
+				<div class="form-row">
+					<label for="password">Password <span class="req">*</span></label>
+					<input id="password" type="password" title="Your account password" required>
+				</div>
+
+				<div class="actions">
+					<button type="submit">Sign In</button>
+					<a href="register.html"><button type="button" class="secondary">Register</button></a>
+				</div>
+			</form>
+			<p class="footer-note">All messages are displayed in-page, no alert popups are used.</p>
+		</section>
+	</div>
+
+	<script src="js/core/storage.js"></script>
+	<script src="js/core/security.js"></script>
+	<script src="js/core/ui.js"></script>
+	<script src="js/modules/authentication.module.js"></script>
+	<script src="js/app.bootstrap.js"></script>
+</body>
+</html>

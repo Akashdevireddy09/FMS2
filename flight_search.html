@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Search Module</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="flight-search">
+  <div class="container">
+    <section class="panel">
+      <h2 class="form-title">Flight Search Module</h2>
+      <div id="flightSearchMsg" class="msg"></div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="fromCity">From <span class="req">*</span></label>
+          <input id="fromCity" type="text" placeholder="Bengaluru">
+        </div>
+        <div class="form-row">
+          <label for="toCity">To <span class="req">*</span></label>
+          <input id="toCity" type="text" placeholder="Delhi">
+        </div>
+        <div class="form-row full">
+          <label for="travelDate">Date Of Travel <span class="req">*</span></label>
+          <input id="travelDate" type="date">
+        </div>
+      </div>
+      <div class="actions">
+        <button id="searchBtn" type="button">Search Flights</button>
+        <button id="backHomeBtn" type="button" class="secondary">Back To Customer Home</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/security.js"></script>
+  <script src="js/core/ui.js"></script>
+  <script src="js/modules/flight-search.module.js"></script>
+  <script src="js/app.bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Filter icon">
+  <defs>
+    <linearGradient id="topGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#28a7d5"/>
+      <stop offset="100%" stop-color="#2c83ec"/>
+    </linearGradient>
+    <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2b8ae8"/>
+      <stop offset="100%" stop-color="#246fd8"/>
+    </linearGradient>
+    <linearGradient id="stemGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2fa8d6"/>
+      <stop offset="100%" stop-color="#2390d0"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="16" y="32" width="480" height="88" rx="8" fill="url(#topGrad)"/>
+  <polygon points="16,120 496,120 315,300 196,300" fill="url(#bodyGrad)"/>
+  <path d="M196 300 H315 V442 L236 496 L196 466 Z" fill="url(#stemGrad)"/>
+</svg>

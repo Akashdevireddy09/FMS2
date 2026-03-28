@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cancellation & Refund Module</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="cancellation-refund">
+  <div class="container">
+    <section class="panel">
+      <h2 class="form-title">Cancellation & Refund Module</h2>
+      <div id="cancelMsg" class="msg"></div>
+      <table>
+        <thead>
+          <tr>
+            <th>Booking Id</th>
+            <th>Journey</th>
+            <th>Status</th>
+            <th>Days Left</th>
+            <th>Refund %</th>
+            <th>Refund Amount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="cancelBody"></tbody>
+      </table>
+      <div class="actions">
+        <button id="backCustomerBtn" type="button" class="secondary">Back To Customer Home</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/core/storage.js"></script>
+  <script src="js/core/security.js"></script>
+  <script src="js/core/ui.js"></script>
+  <script src="js/core/pricing.js"></script>
+  <script src="js/modules/cancellation-refund.module.js"></script>
+  <script src="js/app.bootstrap.js"></script>
+</body>
+</html>
