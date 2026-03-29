@@ -2,7 +2,7 @@
   "use strict";
 
   const SHIFT = 3;
-  const IDLE_LIMIT_MS = 3 * 60 * 1000;
+  const IDLE_LIMIT_MS = 60 * 60 * 1000;
 
   function encryptCaesar(value) {
     const text = String(value || "");
@@ -61,7 +61,7 @@
       return null;
     }
     if (Date.now() - Number(session.lastActive || 0) > IDLE_LIMIT_MS) {
-      logout("Session expired after 3 minutes of inactivity.");
+      logout("Session expired after 1 hour of inactivity.");
       return null;
     }
     if (role && session.role !== role) {
@@ -83,7 +83,7 @@
         return;
       }
       if (Date.now() - Number(session.lastActive || 0) > IDLE_LIMIT_MS) {
-        logout("Session expired after 3 minutes of inactivity.");
+        logout("Session expired after 1 hour of inactivity.");
       }
     }, 15000);
   }
