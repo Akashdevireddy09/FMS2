@@ -15,7 +15,7 @@
         location.href = "index (1).html";
         return;
       }
-      location.href = session.role === "Admin" ? "admin_dashboard.html" : "customer_dashboard.html";
+      location.href = session.role === "Admin" ? "admin/admin_dashboard.html" : "customer_dashboard.html";
     });
   }
 

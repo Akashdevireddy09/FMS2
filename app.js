@@ -132,7 +132,7 @@
     }
 
     if (role && session.role !== role) {
-      location.href = session.role === "Admin" ? "admin_dashboard.html" : "customer_dashboard.html";
+      location.href = session.role === "Admin" ? "admin/admin_dashboard.html" : "customer_dashboard.html";
       return null;
     }
 
@@ -296,7 +296,7 @@
 
     const session = getSession();
     if (session) {
-      location.href = session.role === "Admin" ? "admin_dashboard.html" : "customer_dashboard.html";
+      location.href = session.role === "Admin" ? "admin/admin_dashboard.html" : "customer_dashboard.html";
       return;
     }
 
@@ -324,7 +324,7 @@
       signInUser(user);
       setMessage("loginMsg", "Sign-in successful. Redirecting...", "ok");
       setTimeout(function () {
-        location.href = user.role === "Admin" ? "admin_dashboard.html" : "customer_dashboard.html";
+        location.href = user.role === "Admin" ? "admin/admin_dashboard.html" : "customer_dashboard.html";
       }, 400);
     });
   }
@@ -803,7 +803,7 @@
     }
 
     document.getElementById("addCarrierBtn").addEventListener("click", function () {
-      location.href = "carrier_form.html?mode=add";
+      location.href = "admin/carrier_form.html?mode=add";
     });
 
     document.getElementById("editCarrierBtn").addEventListener("click", function () {
@@ -812,7 +812,7 @@
         setMessage("adminMsg", "Please select Carrier to be Edited.", "warn");
         return;
       }
-      location.href = "carrier_form.html?mode=edit&carrierId=" + encodeURIComponent(selected.value);
+      location.href = "admin/carrier_form.html?mode=edit&carrierId=" + encodeURIComponent(selected.value);
     });
 
     document.getElementById("deleteCarrierBtn").addEventListener("click", function () {
@@ -876,7 +876,7 @@
       });
       if (!target) {
         sessionStorage.setItem("fms_flash", "Carrier not found for editing.");
-        location.href = "admin_dashboard.html";
+        location.href = "admin/admin_dashboard.html";
         return;
       }
       original = Object.assign({}, target);
@@ -958,11 +958,11 @@
         sessionStorage.setItem("fms_flash", "Carrier information saved successfully in the system.");
       }
 
-      location.href = "admin_dashboard.html";
+      location.href = "admin/admin_dashboard.html";
     });
 
     document.getElementById("cancelCarrierBtn").addEventListener("click", function () {
-      location.href = "admin_dashboard.html";
+      location.href = "admin/admin_dashboard.html";
     });
   }
 
@@ -1171,7 +1171,7 @@
         location.href = "index (1).html";
         return;
       }
-      location.href = session.role === "Admin" ? "admin_dashboard.html" : "customer_dashboard.html";
+      location.href = session.role === "Admin" ? "admin/admin_dashboard.html" : "customer_dashboard.html";
     });
   }
 

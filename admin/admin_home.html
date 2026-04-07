@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Home</title>
+</head>
+<body>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var option = params.get("option") || "today";
+      window.location.replace("admin_dashboard.html?view=home&option=" + encodeURIComponent(option));
+    })();
+  </script>
+</body>
+</html>

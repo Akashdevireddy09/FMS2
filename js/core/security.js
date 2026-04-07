@@ -45,19 +45,29 @@
     saveSession(session);
   }
 
+  function resolveAppPath(targetPath) {
+    const path = String(targetPath || "");
+    if (!path) {
+      return path;
+    }
+    const normalizedCurrent = String(window.location.pathname || "").replace(/\\/g, "/");
+    const inAdminFolder = normalizedCurrent.includes("/admin/");
+    return inAdminFolder ? ("../" + path) : path;
+  }
+
   function logout(message) {
     clearSession();
     if (message) {
       sessionStorage.setItem("fms_flash", message);
     }
-    location.href = "index (1).html";
+    location.href = resolveAppPath("index (1).html");
   }
 
   function requireAuth(role) {
     const session = getSession();
     if (!session) {
       sessionStorage.setItem("fms_flash", "Please sign in to continue.");
-      location.href = "index (1).html";
+      location.href = resolveAppPath("index (1).html");
       return null;
     }
     if (Date.now() - Number(session.lastActive || 0) > IDLE_LIMIT_MS) {
@@ -65,7 +75,7 @@
       return null;
     }
     if (role && session.role !== role) {
-      location.href = session.role === "Admin" ? "admin_dashboard.html" : "customer_dashboard.html";
+      location.href = resolveAppPath(session.role === "Admin" ? "admin/admin_dashboard.html" : "customer_dashboard.html");
       return null;
     }
     touchSession();

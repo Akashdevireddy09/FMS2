@@ -36,30 +36,6 @@ body {
   box-shadow: 0 8px 24px rgba(12, 40, 86, 0.08);
 }
 
-.auth-wrap {
-  width: min(900px, 94%);
-  margin: 36px auto;
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 16px;
-}
-
-.hero-box {
-  border-radius: 12px;
-  padding: 22px;
-  background: linear-gradient(150deg, #0f3d89, #1e5bb8);
-  color: #fff;
-}
-
-.hero-box h1 {
-  font-size: 1.7rem;
-  margin-bottom: 10px;
-}
-
-.hero-box p {
-  line-height: 1.45;
-}
-
 .form-title {
   margin-bottom: 14px;
   color: var(--brand-2);
@@ -290,206 +266,6 @@ th {
   color: #9e6200;
 }
 
-.flight-layout {
-  display: grid;
-  grid-template-columns: 1fr 260px;
-  gap: 14px;
-  align-items: start;
-}
-
-.flight-topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
-
-.flight-topbar .form-title {
-  margin-bottom: 0;
-}
-
-.filter-toggle-btn {
-  width: 38px;
-  min-width: 38px;
-  height: 36px;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  line-height: 1;
-  flex: 0 0 auto;
-}
-
-.filter-btn-icon {
-  width: 18px;
-  height: 18px;
-  display: block;
-}
-
-.flight-layout.filters-hidden {
-  grid-template-columns: 1fr;
-}
-
-.flight-layout.filters-hidden .flight-sidebar {
-  display: none;
-}
-
-.flight-results-wrap {
-  min-width: 0;
-}
-
-.flight-sidebar label {
-  font-weight: 600;
-}
-
-.flight-sidebar .form-row {
-  margin-bottom: 12px;
-}
-
-#airlineFilterList {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-#airlineFilterList label,
-.flight-sidebar .inline-choice {
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-}
-
-.flight-sidebar .inline-choice input {
-  width: auto;
-  margin: 0;
-}
-
-.flight-item {
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 12px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  gap: 18px;
-  align-items: center;
-  background: linear-gradient(180deg, #ffffff 0%, #f6f9ff 100%);
-}
-
-.flight-row {
-  min-height: 92px;
-}
-
-.flight-left {
-  min-width: 150px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.flight-emoji {
-  font-size: 1.55rem;
-  line-height: 1;
-  margin-bottom: 2px;
-}
-
-.flight-id {
-  font-weight: 700;
-  color: #1a3b74;
-}
-
-.flight-carrier-name {
-  font-size: 0.88rem;
-  color: #294c86;
-}
-
-.flight-route-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  flex: 1;
-  text-align: center;
-}
-
-.flight-route {
-  font-weight: 600;
-  color: #234d89;
-}
-
-.flight-time-row {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  font-weight: 700;
-  color: #213b6d;
-}
-
-.flight-duration {
-  font-size: 0.82rem;
-  color: #5a6f90;
-  font-weight: 600;
-}
-
-.flight-fare {
-  font-weight: 700;
-  color: #1a3b74;
-  font-size: 1.1rem;
-}
-
-.flight-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
-  min-width: 150px;
-}
-
-.flight-select-btn {
-  width: auto;
-  min-width: 96px;
-  padding: 6px 12px;
-  font-size: 0.86rem;
-}
-
-.seat-map {
-  margin-top: 10px;
-}
-
-.seat-row {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 6px;
-}
-
-.seat {
-  width: 34px;
-  height: 34px;
-  border-radius: 6px;
-  border: 1px solid #99b2d9;
-  background: #e9f1ff;
-  color: #183f7d;
-  font-size: 0.75rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.seat.locked {
-  opacity: 0.35;
-  pointer-events: none;
-}
-
-.seat.selected {
-  background: #1e5bb8;
-  color: #fff;
-  border-color: #123f82;
-}
-
 .muted {
   color: #5a6f90;
   font-size: 0.86rem;
@@ -501,19 +277,14 @@ th {
   color: #5b7298;
 }
 
-.booking-filter-bar {
-  margin-top: 12px;
-  margin-bottom: 8px;
-}
-
 .hidden {
   display: none !important;
 }
 
 @media (max-width: 900px) {
-  .auth-wrap,
   .split,
-  .kpi-grid {
+  .kpi-grid,
+  .form-grid {
     grid-template-columns: 1fr;
   }
 
@@ -521,30 +292,8 @@ th {
     width: 96%;
   }
 
-  .flight-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .flight-topbar {
+  .topbar {
     align-items: flex-start;
     flex-direction: column;
-  }
-
-  .filter-toggle-btn {
-    width: 38px;
-  }
-
-  .flight-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .flight-left,
-  .flight-route-block,
-  .flight-right {
-    width: 100%;
-    align-items: flex-start;
-    text-align: left;
   }
 }
