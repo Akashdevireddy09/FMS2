@@ -39,28 +39,28 @@
         <div class="form-row"><label>Silver Discount</label><input id="silverDiscount" type="number" min="0" max="100"></div>
         <div class="form-row"><label>Gold Discount</label><input id="goldDiscount" type="number" min="0" max="100"></div>
         <div class="form-row"><label>Platinum Discount</label><input id="platinumDiscount" type="number" min="0" max="100"></div>
-      </div>
       <table>
-        <thead>
           <tr>
-            <th>Carrier Id</th>
-            <th>Carrier Name</th>
-            <th>30 Days Discount</th>
-            <th>60 Days Discount</th>
-            <th>90 Days Discount</th>
-            <th>Bulk Discount</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody id="carrierBody"></tbody>
-      </table>
-      <div class="actions">
-        <button id="addCarrierBtn" type="button">Add Carrier</button>
-        <button id="editCarrierBtn" type="button" class="secondary">Edit Carrier</button>
-        <button id="deleteCarrierBtn" type="button" class="danger">Delete Carrier(s)</button>
+          <table>
+            <thead>
+              <tr>
+                <th>Carrier Id</th><th>Carrier Name</th><th>Status</th>
+                <th>30 Days Discount</th><th>60 Days Discount</th><th>90 Days Discount</th>
+                <th>Bulk Discount</th><th>Edit</th><th>Delete</th>
+              </tr>
+            </thead>
+            <tbody id="carrierBody"></tbody>
+          </table>
+
+          <div class="actions" id="carrierManageActions" style="display: none;">
+            <button id="editCarrierBtn" type="button" class="secondary">Edit Carrier</button>
+            <button id="deleteCarrierBtn" type="button" class="danger">Delete Carrier(s)</button>
+          </div>
+          <p class="footer-note" id="carrierManageNote" style="display: none;">Use radio button for edit and checkbox for one or multiple delete operations.</p>
+        </div>
       </div>
-      <p class="footer-note">Use radio button for edit and checkbox for one or multiple delete operations.</p>
+            <th>Carrier Id</th>
+      </table>
     </section>
 
     <section id="flightSection" class="panel hidden">
@@ -277,30 +277,21 @@
       </div>
 
       <nav class="admin-nav-links" aria-label="Admin sections">
-        <div class="nav-dropdown">
-          <button id="tabHome" type="button" class="secondary nav-tab nav-tab-home">Home</button>
-          <div class="nav-dropdown-menu">
-            <a href="admin_home.html?option=today">Today</a>
-            <a href="admin_home.html?option=weekly">Weekly</a>
-            <a href="admin_home.html?option=monthly">Monthly</a>
-            <a href="admin_home.html?option=yearly">Yearly</a>
-          </div>
-        </div>
+        <button id="tabHome" type="button" class="secondary nav-tab nav-tab-home">Home</button>
 
         <div class="nav-dropdown">
           <button id="tabCarrier" type="button" class="secondary nav-tab">Carrier Management</button>
           <div class="nav-dropdown-menu">
-            <a href="admin_carrier.html?option=all">All Carriers</a>
-            <a href="admin_carrier.html?option=add">Add Carrier</a>
+            <a href="add-carrier.html">Add Carrier (Discounts & Refund)</a>
+            <a href="manage-carriers.html">Manage Carrier (View/Edit/Delete)</a>
           </div>
         </div>
 
         <div class="nav-dropdown">
           <button id="tabFlight" type="button" class="secondary nav-tab">Flight Management</button>
           <div class="nav-dropdown-menu">
-            <a href="admin_flight.html?option=all">All Flights</a>
-            <a href="admin_flight.html?option=active">Active Flights</a>
-            <a href="admin_flight.html?option=inactive">Inactive Flights</a>
+            <a href="add-flight.html">Add Flight</a>
+            <a href="manage-flights.html">Manage Flights</a>
           </div>
         </div>
 
@@ -527,8 +518,10 @@
       <h2 class="form-title">Carrier Management</h2>
       <div class="form-grid">
 
-        <div class="form-row">
-          <label>Carrier Id (auto for add)</label>
+        <!-- ════ ADD CARRIER FORM ════ -->
+        <div id="carrierAddForm" style="display: none;" class="form-grid">
+          <div class="form-row">
+            <label>Carrier Id (auto for add)</label>
           <div class="field-wrap">
             <input id="carrierId" type="number" readonly>
           </div>
@@ -632,6 +625,30 @@
             <input id="platinumDiscount" type="text" inputmode="numeric" maxlength="3"
                    placeholder="0–100">
             <span class="field-error" id="platinumDiscountErr"></span>
+                  </div><!-- /carrierAddForm -->
+
+                  <div class="actions" id="carrierAddActions" style="display: none;">
+                    <button id="addCarrierBtn" type="button">Add Carrier</button>
+                  </div>
+
+                  <!-- ════ MANAGE CARRIER TABLE ════ -->
+                  <div id="carrierManageTable" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                      <h3 style="margin: 0;">Manage Carrier</h3>
+                      <button id="carrierFilterBtn" type="button" class="secondary" title="Filter carriers by status" style="padding: 8px 12px; display: flex; align-items: center; gap: 6px;">
+                        📋 Filter
+                      </button>
+                    </div>
+
+                    <!-- Filter Menu -->
+                    <div id="carrierFilterMenu" style="display: none; margin-bottom: 16px; padding: 12px; background: #f7fafc; border-radius: 6px; border: 1px solid #e2e8f0;">
+                      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button class="carrierFilterOption" data-status="all" style="padding: 6px 12px; border: 1px solid #cbd5e0; background: #fff; border-radius: 4px; cursor: pointer;">All Carriers</button>
+                        <button class="carrierFilterOption" data-status="active" style="padding: 6px 12px; border: 1px solid #cbd5e0; background: #fff; border-radius: 4px; cursor: pointer;">Active Carriers</button>
+                        <button class="carrierFilterOption" data-status="inactive" style="padding: 6px 12px; border: 1px solid #cbd5e0; background: #fff; border-radius: 4px; cursor: pointer;">Inactive Carriers</button>
+                      </div>
+                    </div>
+                  </div>
           </div>
         </div>
 
@@ -902,6 +919,8 @@
   <script src="../js/core/storage.js"></script>
   <script src="../js/core/security.js"></script>
   <script src="../js/core/ui.js"></script>
+  <script src="../js/modules/admin-carrier-form.module.js"></script>
+  <script src="../js/modules/admin-carrier-list.module.js"></script>
   <script src="../js/modules/admin-dashboard-flight-management.module.js"></script>
   <script src="../js/app.bootstrap.js"></script>
   </body>

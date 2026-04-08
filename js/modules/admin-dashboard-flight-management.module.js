@@ -234,8 +234,8 @@
     }
 
     bindTab("tabHome", function () { showSection("landingSection"); renderLandingPage(currentPeriod); });
-    bindTab("tabCarrier", function () { showSection("carrierSection"); renderCarriers(); });
-    bindTab("tabFlight", function () { showSection("flightSection"); renderFlights(); });
+    bindTab("tabCarrier", function () { location.href = "manage-carriers.html"; });
+    bindTab("tabFlight", function () { location.href = "manage-flights.html"; });
     bindTab("tabSchedule", function () { showSection("scheduleSection"); renderSchedules(); });
     bindTab("tabUsers", function () { showSection("userSection"); renderUsers(); });
     bindTab("tabAnalytics", function () { showSection("analyticsSection"); renderAnalytics(); });

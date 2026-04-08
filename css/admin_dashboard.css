@@ -218,6 +218,48 @@ button.danger {
   flex: 1;
   min-width: 0;
   white-space: normal;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.admin-navbar .nav-links a,
+.admin-navbar .nav-links button,
+.admin-navbar .admin-nav-links a,
+.admin-navbar .admin-nav-links button {
+  width: auto;
+  flex: 0 0 auto;
+}
+
+.admin-navbar .nav-links button,
+.admin-navbar .admin-nav-links button {
+  min-width: 104px;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+  color: #f4f8ff;
+  background: rgba(255, 255, 255, 0.08);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.16);
+  text-decoration: none;
 }
 
 .nav-dropdown {
@@ -255,6 +297,64 @@ button.danger {
 }
 
 .nav-dropdown-menu a:hover {
+  background: #edf4ff;
+}
+
+.filter-shell {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 12px 0 14px;
+}
+
+.filter-icon-btn {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  padding: 0;
+  border-radius: 10px;
+  background: #fff;
+  color: #0f3d89;
+  border: 1px solid #9db9e6;
+  box-shadow: 0 4px 12px rgba(15, 61, 137, 0.08);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.filter-icon-btn:hover {
+  background: #edf4ff;
+}
+
+.filter-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 180px;
+  padding: 8px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid #d7e2f3;
+  box-shadow: 0 10px 24px rgba(12, 40, 86, 0.14);
+  z-index: 20;
+}
+
+.filter-menu button {
+  width: 100%;
+  margin: 0 0 6px 0;
+  border-radius: 8px;
+  background: #f8fbff;
+  color: #0f3d89;
+  border: 1px solid #c9d9f0;
+  text-align: left;
+  padding: 8px 10px;
+}
+
+.filter-menu button:last-child {
+  margin-bottom: 0;
+}
+
+.filter-menu button:hover {
   background: #edf4ff;
 }
 

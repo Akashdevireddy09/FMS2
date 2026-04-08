@@ -90,7 +90,8 @@
           refund20Days: 85,
           silverDiscount: 2,
           goldDiscount: 5,
-          platinumDiscount: 8
+            platinumDiscount: 8,
+            active: true
         },
         {
           carrierId: 302,
@@ -104,7 +105,8 @@
           refund20Days: 80,
           silverDiscount: 2,
           goldDiscount: 4,
-          platinumDiscount: 7
+          platinumDiscount: 7,
+          active: true
         }
       ];
       setJSON(STORAGE_KEYS.carriers, list);

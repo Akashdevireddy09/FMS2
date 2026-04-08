@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Carrier - Admin Portal</title>
+  <link rel="stylesheet" href="../css/admin_dashboard.css">
+</head>
+<body data-page="admin-add-carrier">
+  <div class="container">
+    <header class="topbar admin-navbar">
+      <div class="admin-brand-block">
+        <p class="admin-brand-kicker">Operations Console</p>
+        <h1 class="brand">FMS Admin Dashboard</h1>
+      </div>
+
+      <nav class="admin-nav-links" aria-label="Admin sections">
+        <a href="admin_dashboard.html" class="secondary nav-tab nav-tab-home">Home</a>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Carrier Management</button>
+          <div class="nav-dropdown-menu">
+            <a href="add-carrier.html">Add Carrier</a>
+            <a href="manage-carriers.html">Manage Carriers</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Flight Management</button>
+          <div class="nav-dropdown-menu">
+            <a href="add-flight.html">Add Flight</a>
+            <a href="manage-flights.html">Manage Flights</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Flight Schedule</button>
+          <div class="nav-dropdown-menu">
+            <a href="admin_schedule.html?option=all">All Schedules</a>
+            <a href="admin_schedule.html?option=add">Add Schedule</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">User Management</button>
+          <div class="nav-dropdown-menu">
+            <a href="admin_users.html?option=all">All Users</a>
+            <a href="admin_users.html?option=active">Active Users</a>
+            <a href="admin_users.html?option=inactive">Inactive Users</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Analytics</button>
+          <div class="nav-dropdown-menu">
+            <a href="admin_analytics.html?option=kpi">KPI Summary</a>
+            <a href="admin_analytics.html?option=inventory">Seat Inventory</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Audit Trail</button>
+          <div class="nav-dropdown-menu">
+            <a href="admin_audit.html?option=recent">Recent Actions</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="admin-session-block">
+        <span class="session-pill"><strong id="adminName">Admin</strong></span>
+        <button id="adminLogoutBtn" type="button" class="danger">Sign Out</button>
+      </div>
+    </header>
+
+    <div id="adminMsg" class="msg"></div>
+
+    <section class="panel">
+      <h2 class="form-title">Add New Carrier</h2>
+      <div class="form-grid">
+        <div class="form-row"><label>Carrier Id (auto for add)</label><input id="carrierId" type="number" readonly></div>
+        <div class="form-row">
+          <label>Carrier Name</label>
+          <input id="carrierName" placeholder="Carrier Name">
+          <small id="carrierNameCount" style="color:#999; font-size:0.85rem;">0 / 20</small>
+        </div>
+        <div class="form-row"><label>Discount 30 Days (%)</label><input id="discount30" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Discount 60 Days (%)</label><input id="discount60" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Discount 90 Days (%)</label><input id="discount90" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Bulk Discount (%)</label><input id="bulkBookingDiscount" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Refund 2 Days (%)</label><input id="refund2Days" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Refund 10 Days (%)</label><input id="refund10Days" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Refund 20+ Days (%)</label><input id="refund20Days" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Silver Discount (%)</label><input id="silverDiscount" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Gold Discount (%)</label><input id="goldDiscount" type="number" min="0" max="100"></div>
+        <div class="form-row"><label>Platinum Discount (%)</label><input id="platinumDiscount" type="number" min="0" max="100"></div>
+      </div>
+      <div class="actions">
+        <button id="addCarrierBtn" type="button">Add Carrier</button>
+        <button id="backBtn" type="button" class="secondary">Cancel</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/core/storage.js"></script>
+  <script src="../js/core/security.js"></script>
+  <script src="../js/core/ui.js"></script>
+  <script src="../js/app.bootstrap.js"></script>
+  <script src="../js/modules/admin-carrier-form.module.js"></script>
+</body>
+</html>
