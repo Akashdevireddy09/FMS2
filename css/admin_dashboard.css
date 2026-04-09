@@ -21,11 +21,14 @@ body {
   background: linear-gradient(135deg, #eef4ff, #f8fbff);
   color: var(--ink);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
   width: min(1400px, 99%);
   margin: 24px auto;
+  flex: 1 0 auto;
 }
 
 .panel {
@@ -265,11 +268,13 @@ button.danger {
 .nav-dropdown {
   position: relative;
   display: inline-flex;
+  padding-bottom: 8px;
+  margin-bottom: -8px;
 }
 
 .nav-dropdown-menu {
   position: absolute;
-  top: calc(100% + 6px);
+  top: calc(100% - 1px);
   left: 0;
   min-width: 190px;
   background: #ffffff;
@@ -279,6 +284,15 @@ button.danger {
   display: none;
   z-index: 1200;
   padding: 6px;
+}
+
+.nav-dropdown::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 8px;
 }
 
 .nav-dropdown:hover .nav-dropdown-menu,
@@ -358,6 +372,28 @@ button.danger {
   background: #edf4ff;
 }
 
+.booking-snippet {
+  padding: 8px 10px;
+  background: #f4f8ff;
+  border: 1px solid #d7e2f3;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #334155;
+}
+
+.booking-snippet strong {
+  color: #0f3d89;
+}
+
+.schedule-add-btn {
+  width: auto;
+  min-width: 160px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+}
+
 .admin-nav-links a,
 .admin-nav-links button {
   width: auto;
@@ -380,6 +416,29 @@ button.danger {
   color: #ffffff;
   text-decoration: underline;
   transform: none;
+}
+
+.admin-nav-links .nav-tab.active,
+.admin-nav-links .nav-tab[aria-current="page"] {
+  background: linear-gradient(180deg, #111111 0%, #000000 100%);
+  color: #ffffff;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28);
+  transform: translateY(-1px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.admin-nav-links .nav-tab.active:hover,
+.admin-nav-links .nav-tab[aria-current="page"]:hover {
+  background: linear-gradient(180deg, #1b1b1b 0%, #000000 100%);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.admin-nav-links .nav-dropdown > .nav-tab.active,
+.admin-nav-links .nav-dropdown > .nav-tab[aria-current="page"] {
+  padding: 6px 12px;
 }
 
 .admin-session-block {
@@ -1113,13 +1172,45 @@ th {
   color: #5b7298;
 }
 
-.admin-footer {
-  margin-top: 18px;
-  background: #102e5f;
-  border: 1px solid #1b447f;
-  border-radius: 14px;
+.admin-footer,
+.app-footer {
+  margin-top: 16px;
+  background: #0f2448;
+  border: 1px solid #173968;
+  border-radius: 12px;
   color: #dce9ff;
-  padding: 18px;
+  padding: 10px 14px;
+  flex-shrink: 0;
+}
+
+.app-footer {
+  margin-left: auto;
+  margin-right: auto;
+  width: min(1400px, 99%);
+  margin-top: auto;
+}
+
+.app-footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.app-footer-brand {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.app-footer-sep {
+  color: #8fb2ea;
+}
+
+.app-footer-note {
+  color: #bfd4f8;
 }
 
 .footer-grid {
@@ -1129,15 +1220,15 @@ th {
 }
 
 .footer-col h3 {
-  font-size: 0.95rem;
-  margin-bottom: 8px;
+  font-size: 0.88rem;
+  margin-bottom: 6px;
   color: #ffffff;
 }
 
 .footer-col p,
 .footer-col li {
-  font-size: 0.86rem;
-  line-height: 1.45;
+  font-size: 0.8rem;
+  line-height: 1.35;
 }
 
 .footer-col ul {
@@ -1146,10 +1237,10 @@ th {
 }
 
 .footer-bottom {
-  margin-top: 14px;
-  padding-top: 10px;
+  margin-top: 10px;
+  padding-top: 8px;
   border-top: 1px solid rgba(205, 223, 255, 0.24);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   color: #bfd4f8;
 }
 

@@ -13,6 +13,14 @@
     return n > 0 ? 1 : 0;
   }
 
+  function getScheduleTiming(scheduleId) {
+    try {
+      return JSON.parse(localStorage.getItem("fms_schedule_timing_" + scheduleId) || "{}");
+    } catch (error) {
+      return {};
+    }
+  }
+
   function renderAirlineFilters(results, carrierMap) {
     const holder = document.getElementById("airlineFilterList");
     const ids = Array.from(new Set(results.map(function (x) { return Number(x.flight.carrierId); })));
@@ -34,9 +42,13 @@
 
     holder.innerHTML = results.map(function (x, index) {
       const carrierName = carrierMap[x.flight.carrierId] || x.flight.carrierId;
-      const dep = ui.escapeHtml(x.flight.departureTime || "--:--");
-      const arr = ui.escapeHtml(x.flight.arrivalTime || "--:--");
-      const dur = ui.escapeHtml(formatDuration(x.flight.durationMins || 0));
+      const scheduleId = x.schedule ? x.schedule.flightScheduleId : null;
+      const timing = (x.scheduleTiming && typeof x.scheduleTiming === "object")
+        ? x.scheduleTiming
+        : getScheduleTiming(scheduleId);
+      const dep = ui.escapeHtml(timing.boardingTime || x.flight.departureTime || "--:--");
+      const arr = ui.escapeHtml(timing.arrivalTime || x.flight.arrivalTime || "--:--");
+      const dur = ui.escapeHtml(timing.duration || formatDuration(x.flight.durationMins || 0));
       const stopText = normalizeStopCount(x.flight.stops) === 0
         ? "Non-stop"
         : "1 Stop" + (x.flight.stopCity ? " (via " + ui.escapeHtml(String(x.flight.stopCity)) + ")" : "");

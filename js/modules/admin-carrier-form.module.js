@@ -210,14 +210,11 @@
     if (document.body.getAttribute("data-page") !== "admin-add-carrier") {
       return;
     }
-    // Check URL parameters: view=carrier&option=add
+
     const params = new URLSearchParams(window.location.search);
-    const view = params.get("view");
     const option = params.get("option");
-    
-    if (view !== "carrier" || option !== "add") {
-      return;
-    }
+    const carrierIdParam = Number(params.get("carrierId"));
+    const isEditMode = option === "edit" && Number.isFinite(carrierIdParam);
 
     const storage = window.FMS.core.storage;
     const security = window.FMS.core.security;
@@ -252,52 +249,118 @@
 
     attachCarrierFieldValidation();
 
-    document.getElementById("addCarrierBtn").addEventListener("click", function () {
-      if (!validateCarrierForm()) {
-        ui.setMessage("adminMsg", "Please correct the highlighted carrier fields.", "err");
-        return;
+    const addCarrierBtn = document.getElementById("addCarrierBtn");
+    const carrierIdInput = document.getElementById("carrierId");
+
+    function getNextCarrierIdPreview() {
+      const seq = storage.getJSON(storage.keys.seq, {
+        user: 2000,
+        carrier: 500,
+        flight: 9500,
+        schedule: 7500,
+        booking: 11000
+      });
+      return Number(seq.carrier || 500) + 1;
+    }
+
+    let editingCarrier = null;
+    if (isEditMode) {
+      const carrier = storage.getCarriers().find(function (c) {
+        return Number(c.carrierId) === carrierIdParam;
+      });
+      editingCarrier = carrier || null;
+      if (!carrier) {
+        ui.setMessage("adminMsg", "Carrier not found for editing.", "err");
+        if (addCarrierBtn) {
+          addCarrierBtn.disabled = true;
+        }
+      } else {
+        if (carrierIdInput) carrierIdInput.value = String(carrier.carrierId);
+        document.getElementById("carrierName").value = carrier.carrierName || "";
+        document.getElementById("discount30").value = String(num(carrier.discount30));
+        document.getElementById("discount60").value = String(num(carrier.discount60));
+        document.getElementById("discount90").value = String(num(carrier.discount90));
+        document.getElementById("bulkBookingDiscount").value = String(num(carrier.bulkBookingDiscount));
+        document.getElementById("refund2Days").value = String(num(carrier.refund2Days));
+        document.getElementById("refund10Days").value = String(num(carrier.refund10Days));
+        document.getElementById("refund20Days").value = String(num(carrier.refund20Days));
+        document.getElementById("silverDiscount").value = String(num(carrier.silverDiscount));
+        document.getElementById("goldDiscount").value = String(num(carrier.goldDiscount));
+        document.getElementById("platinumDiscount").value = String(num(carrier.platinumDiscount));
+        if (document.getElementById("carrierNameCount")) {
+          document.getElementById("carrierNameCount").textContent = (carrier.carrierName || "").length + " / 20";
+        }
+        if (addCarrierBtn) {
+          addCarrierBtn.textContent = "Update Carrier";
+        }
       }
+    } else if (carrierIdInput) {
+      carrierIdInput.value = String(getNextCarrierIdPreview());
+    }
 
-      const payload = {
-        carrierId: storage.nextId("carrier"),
-        carrierName: document.getElementById("carrierName").value.trim(),
-        discount30: num(document.getElementById("discount30").value),
-        discount60: num(document.getElementById("discount60").value),
-        discount90: num(document.getElementById("discount90").value),
-        bulkBookingDiscount: num(document.getElementById("bulkBookingDiscount").value),
-        refund2Days: num(document.getElementById("refund2Days").value),
-        refund10Days: num(document.getElementById("refund10Days").value),
-        refund20Days: num(document.getElementById("refund20Days").value),
-        silverDiscount: num(document.getElementById("silverDiscount").value),
-        goldDiscount: num(document.getElementById("goldDiscount").value),
-        platinumDiscount: num(document.getElementById("platinumDiscount").value),
-        active: true
-      };
+    if (addCarrierBtn) {
+      addCarrierBtn.addEventListener("click", function () {
+        if (!validateCarrierForm()) {
+          ui.setMessage("adminMsg", "Please correct the highlighted carrier fields.", "err");
+          return;
+        }
 
-      if (!payload.carrierName) {
-        ui.setMessage("adminMsg", "Carrier Name is required.", "err");
-        return;
-      }
+        const payload = {
+          carrierId: isEditMode ? carrierIdParam : storage.nextId("carrier"),
+          carrierName: document.getElementById("carrierName").value.trim(),
+          discount30: num(document.getElementById("discount30").value),
+          discount60: num(document.getElementById("discount60").value),
+          discount90: num(document.getElementById("discount90").value),
+          bulkBookingDiscount: num(document.getElementById("bulkBookingDiscount").value),
+          refund2Days: num(document.getElementById("refund2Days").value),
+          refund10Days: num(document.getElementById("refund10Days").value),
+          refund20Days: num(document.getElementById("refund20Days").value),
+          silverDiscount: num(document.getElementById("silverDiscount").value),
+          goldDiscount: num(document.getElementById("goldDiscount").value),
+          platinumDiscount: num(document.getElementById("platinumDiscount").value),
+          active: isEditMode ? (editingCarrier ? editingCarrier.active !== false : true) : true
+        };
 
-      const carriers = storage.getCarriers();
-      carriers.push(payload);
-      storage.saveCarriers(carriers);
-      storage.addAudit("CREATE", "CARRIER", "Carrier created " + payload.carrierId, session.userId);
-      ui.setMessage("adminMsg", "Carrier saved successfully! Carrier ID: " + payload.carrierId, "ok");
+        if (!payload.carrierName) {
+          ui.setMessage("adminMsg", "Carrier Name is required.", "err");
+          return;
+        }
 
-      setTimeout(function () {
-        location.href = "manage-carriers.html";
-      }, 1500);
-    });
+        const carriers = storage.getCarriers();
+        if (isEditMode) {
+          const updated = carriers.map(function (c) {
+            return Number(c.carrierId) === carrierIdParam ? Object.assign({}, c, payload) : c;
+          });
+          storage.saveCarriers(updated);
+          storage.addAudit("UPDATE", "CARRIER", "Carrier updated " + payload.carrierId, session.userId);
+        } else {
+          carriers.push(payload);
+          storage.saveCarriers(carriers);
+          storage.addAudit("CREATE", "CARRIER", "Carrier created " + payload.carrierId, session.userId);
+        }
+
+        ui.showPopup({
+          title: "Success",
+          message: isEditMode
+            ? "Carrier updated successfully! Carrier ID: " + payload.carrierId
+            : "Carrier saved successfully! Carrier ID: " + payload.carrierId,
+          buttonText: "OK",
+          onClose: function () {
+            clearCarrierForm();
+            if (carrierIdInput) {
+              carrierIdInput.value = String(getNextCarrierIdPreview());
+            }
+            if (addCarrierBtn) {
+              addCarrierBtn.textContent = "Add Carrier";
+            }
+          }
+        });
+      });
+    }
 
     document.getElementById("backBtn").addEventListener("click", function () {
       location.href = "admin_dashboard.html";
     });
   }
-      // Redirect to manage carriers view after success
-      clearCarrierForm();
-      setTimeout(function () {
-        location.href = "admin_dashboard.html?view=carrier&option=manage";
-      }, 1500);
   window.FMS.modules.adminCarrierForm = { init: init };
 })();

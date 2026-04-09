@@ -461,6 +461,7 @@
 
   window.FMS = window.FMS || {};
   window.FMS.core = window.FMS.core || {};
+  window.FMS.modules = window.FMS.modules || {};
   window.FMS.core.storage = {
     keys: STORAGE_KEYS,
     getJSON: getJSON,

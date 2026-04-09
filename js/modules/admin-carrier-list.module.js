@@ -48,14 +48,6 @@
   function init() {
     if (document.body.getAttribute("data-page") !== "admin-manage-carriers") {
       return;
-        // Check URL parameters: view=carrier&option=manage
-        const params = new URLSearchParams(window.location.search);
-        const view = params.get("view");
-        const option = params.get("option");
-    
-        if (view !== "carrier" || option !== "manage") {
-          return;
-        }
     }
 
     const storage = window.FMS.core.storage;
@@ -101,53 +93,7 @@
       document.getElementById("carrierBody").innerHTML = rows || "<tr><td colspan=\"8\">No carriers found.</td></tr>";
     }
 
-    function renderCarriers(filterStatus) {
-      filterStatus = filterStatus || "all";
-      const allCarriers = storage.getCarriers();
-      let carriersToShow = allCarriers;
-      
-      if (filterStatus === "active") {
-        carriersToShow = allCarriers.filter(function (c) { return c.active !== false; });
-      } else if (filterStatus === "inactive") {
-        carriersToShow = allCarriers.filter(function (c) { return c.active === false; });
-      }
-
-      const rows = carriersToShow.map(function (c) {
-        const status = c.active !== false ? "Active" : "Inactive";
-        const statusClass = c.active !== false ? "style=\"color:#22863a; font-weight:600;\"" : "style=\"color:#cb2431; font-weight:600;\"";
-        return "<tr>" +
-          "<td><input type=\"radio\" name=\"carrierEdit\" value=\"" + c.carrierId + "\" /></td>" +
-          "<td>" + c.carrierId + "</td><td>" + ui.escapeHtml(c.carrierName) + "</td>" +
-          "<td " + statusClass + ">" + status + "</td>" +
-          "<td>" + c.discount30 + "%</td><td>" + c.discount60 + "%</td><td>" + c.discount90 + "%</td><td>" + c.bulkBookingDiscount + "%</td>" +
-          "<td><input type=\"checkbox\" class=\"carrierDelete\" value=\"" + c.carrierId + "\" /></td>" +
-          "</tr>";
-      }).join("");
-      document.getElementById("carrierBody").innerHTML = rows || "<tr><td colspan=\"9\">No carriers found.</td></tr>";
-    }
-
-    // Initialize with all carriers
-    let currentFilter = "all";
-    renderCarriers(currentFilter);
-
-    // Filter button toggle
-    const filterBtn = document.getElementById("carrierFilterBtn");
-    const filterMenu = document.getElementById("carrierFilterMenu");
-    if (filterBtn && filterMenu) {
-      filterBtn.addEventListener("click", function () {
-        filterMenu.style.display = filterMenu.style.display === "none" ? "block" : "none";
-      });
-    }
-
-    // Filter option buttons
-    const filterOptions = document.querySelectorAll(".carrierFilterOption");
-    filterOptions.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        currentFilter = this.getAttribute("data-status");
-        renderCarriers(currentFilter);
-        if (filterMenu) filterMenu.style.display = "none";
-      });
-    });
+    renderCarriers();
 
     document.getElementById("deleteCarrierBtn").addEventListener("click", function () {
       const selected = Array.from(document.querySelectorAll(".carrierDelete:checked")).map(function (el) { return Number(el.value); });
@@ -155,10 +101,18 @@
         ui.setMessage("adminMsg", "Please select Carrier(s) to delete.", "warn");
         return;
       }
-      storage.saveCarriers(storage.getCarriers().filter(function (c) { return !selected.includes(Number(c.carrierId)); }));
-      storage.addAudit("DELETE", "CARRIER", "Deleted carriers: " + selected.join(","), session.userId);
-      renderCarriers();
-      ui.setMessage("adminMsg", "Carrier(s) deleted successfully.", "ok");
+      ui.showConfirmPopup({
+        title: "Delete Carrier(s)",
+        message: "Delete the selected carrier(s)? This action cannot be undone.",
+        confirmText: "Delete",
+        cancelText: "Cancel",
+        onConfirm: function () {
+        storage.saveCarriers(storage.getCarriers().filter(function (c) { return !selected.includes(Number(c.carrierId)); }));
+        storage.addAudit("DELETE", "CARRIER", "Deleted carriers: " + selected.join(","), session.userId);
+        renderCarriers();
+        ui.setMessage("adminMsg", "Carrier(s) deleted successfully.", "ok");
+        }
+      });
     });
 
     document.getElementById("editCarrierBtn").addEventListener("click", function () {
@@ -171,9 +125,7 @@
       if (!c) {
         return;
       }
-      // Set selected carrier in session for editing
-      sessionStorage.setItem("fms_edit_carrier", JSON.stringify(c));
-      location.href = "edit-carrier.html";
+      location.href = "add-carrier.html?option=edit&carrierId=" + encodeURIComponent(String(c.carrierId));
     });
 
     document.getElementById("backBtn").addEventListener("click", function () {

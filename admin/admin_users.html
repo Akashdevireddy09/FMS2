@@ -3,15 +3,121 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin User Management</title>
+  <title>User Management - Admin Portal</title>
+  <link rel="stylesheet" href="../css/admin_dashboard.css">
 </head>
-<body>
-  <script>
-    (function () {
-      var params = new URLSearchParams(window.location.search);
-      var option = params.get("option") || "all";
-      window.location.replace("admin_dashboard.html?view=users&option=" + encodeURIComponent(option));
-    })();
-  </script>
+<body data-page="admin-users">
+  <div class="container">
+    <header class="topbar admin-navbar">
+      <div class="admin-brand-block">
+        <p class="admin-brand-kicker">Operations Console</p>
+        <h1 class="brand">FMS Admin Dashboard</h1>
+      </div>
+
+      <nav class="admin-nav-links" aria-label="Admin sections">
+        <a href="admin_dashboard.html" class="secondary nav-tab nav-tab-home">Home</a>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Carrier Management</button>
+          <div class="nav-dropdown-menu">
+            <a href="add-carrier.html">Add Carrier</a>
+            <a href="manage-carriers.html">Manage Carriers</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Flight Management</button>
+          <div class="nav-dropdown-menu">
+            <a href="add-flight.html">Add Flight</a>
+            <a href="manage-flights.html">Manage Flights</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Flight Schedule</button>
+          <div class="nav-dropdown-menu">
+            <a href="admin_schedule.html">All Schedules</a>
+            <a href="admin_schedule.html?option=add">Add Schedule</a>
+          </div>
+        </div>
+
+        <a href="admin_users.html?option=all" class="secondary nav-tab">User Management</a>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Analytics</button>
+          <div class="nav-dropdown-menu">
+            <a href="admin_analytics.html">KPI Summary</a>
+            <a href="admin_analytics.html?option=inventory">Seat Inventory</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Audit Trail</button>
+          <div class="nav-dropdown-menu">
+            <a href="admin_audit.html?option=recent">Recent Actions</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="admin-session-block">
+        <span class="session-pill"><strong id="adminName">Admin</strong></span>
+        <button id="adminLogoutBtn" type="button" class="danger">Sign Out</button>
+      </div>
+    </header>
+
+    <div id="adminMsg" class="msg"></div>
+
+    <section class="panel">
+      <h2 class="form-title">User Management</h2>
+      <div class="actions">
+        <input id="userSearch" placeholder="Search by id, name, email">
+        <button id="userSearchBtn" type="button">Search</button>
+      </div>
+      <div class="filter-shell" style="margin-top:12px; margin-bottom:12px;">
+        <button id="userFilterBtn" type="button" class="filter-icon-btn" aria-label="Filter users" aria-expanded="false" title="Filter users">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M3 5h18l-7 8v5l-4 2v-7L3 5z"></path>
+          </svg>
+        </button>
+        <div id="userFilterMenu" class="filter-menu" style="display:none; min-width: 190px;">
+          <button type="button" data-filter="all">All Users</button>
+          <button type="button" data-filter="active">Active Users</button>
+          <button type="button" data-filter="inactive">Inactive Users</button>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>User Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Bookings</th>
+            <th>View Bookings</th>
+          </tr>
+        </thead>
+        <tbody id="userBody"></tbody>
+      </table>
+      <div class="actions">
+        <button id="backBtn" type="button" class="secondary">Back to Dashboard</button>
+      </div>
+    </section>
+
+    <!-- BOOKING HISTORY MODAL -->
+    <div id="bookingModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+      <div style="background:#fff; border-radius:12px; padding:20px; width:90%; max-width:600px; max-height:80vh; overflow-y:auto;">
+        <h3 id="bookingModalTitle" style="margin-bottom:12px;"></h3>
+        <div id="bookingModalContent"></div>
+        <button id="closeBookingModalBtn" type="button" style="margin-top:12px;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/core/storage.js"></script>
+  <script src="../js/core/security.js"></script>
+  <script src="../js/core/ui.js"></script>
+  <script src="../js/app.bootstrap.js"></script>
+  <script src="../js/modules/admin-users.module.js"></script>
 </body>
 </html>

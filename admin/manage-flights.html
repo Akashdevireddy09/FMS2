@@ -36,24 +36,17 @@
         <div class="nav-dropdown">
           <button type="button" class="secondary nav-tab">Flight Schedule</button>
           <div class="nav-dropdown-menu">
-            <a href="admin_schedule.html?option=all">All Schedules</a>
+            <a href="admin_schedule.html">All Schedules</a>
             <a href="admin_schedule.html?option=add">Add Schedule</a>
           </div>
         </div>
 
-        <div class="nav-dropdown">
-          <button type="button" class="secondary nav-tab">User Management</button>
-          <div class="nav-dropdown-menu">
-            <a href="admin_users.html?option=all">All Users</a>
-            <a href="admin_users.html?option=active">Active Users</a>
-            <a href="admin_users.html?option=inactive">Inactive Users</a>
-          </div>
-        </div>
+        <a href="admin_users.html?option=all" class="secondary nav-tab">User Management</a>
 
         <div class="nav-dropdown">
           <button type="button" class="secondary nav-tab">Analytics</button>
           <div class="nav-dropdown-menu">
-            <a href="admin_analytics.html?option=kpi">KPI Summary</a>
+            <a href="admin_analytics.html">KPI Summary</a>
             <a href="admin_analytics.html?option=inventory">Seat Inventory</a>
           </div>
         </div>
@@ -77,7 +70,7 @@
     <section class="panel">
       <h2 class="form-title">Manage Flights</h2>
       <div class="filter-shell">
-        <button id="flightFilterBtn" type="button" class="filter-icon-btn" aria-label="Show flight filters" aria-expanded="false">☰</button>
+        <button id="flightFilterBtn" type="button" class="filter-icon-btn" aria-label="Show flight filters" aria-expanded="false">☰ Filter</button>
         <div id="flightFilterMenu" class="filter-menu hidden">
           <button id="filterAllFlights" type="button">All Flights</button>
           <button id="filterActiveFlights" type="button">Active Flights</button>
@@ -92,13 +85,10 @@
             <th>Carrier</th>
             <th>Origin</th>
             <th>Destination</th>
-            <th>Boarding</th>
-            <th>Arrival</th>
-            <th>Duration</th>
             <th>Air Fare</th>
-            <th>Economy</th>
-            <th>Business</th>
-            <th>Executive</th>
+            <th>Economy Seats</th>
+            <th>Business Seats</th>
+            <th>Executive Seats</th>
           </tr>
         </thead>
         <tbody id="flightBody"></tbody>
@@ -107,7 +97,7 @@
         <button id="deleteFlightBtn" type="button" class="danger">Delete Selected Flight(s)</button>
         <button id="backBtn" type="button" class="secondary">Back</button>
       </div>
-      <p class="footer-note">Use checkboxes to select flights for deletion.</p>
+      <p class="footer-note">Use checkboxes to select flights for deletion. Boarding/arrival times are managed in Flight Schedule.</p>
     </section>
   </div>
 

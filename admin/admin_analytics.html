@@ -3,15 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Analytics</title>
+  <title>Analytics - Admin Portal</title>
+  <link rel="stylesheet" href="../css/admin_dashboard.css">
 </head>
-<body>
-  <script>
-    (function () {
-      var params = new URLSearchParams(window.location.search);
-      var option = params.get("option") || "kpi";
-      window.location.replace("admin_dashboard.html?view=analytics&option=" + encodeURIComponent(option));
-    })();
-  </script>
+<body data-page="admin-analytics">
+  <div class="container">
+    <header class="topbar admin-navbar">
+      <div class="admin-brand-block">
+        <p class="admin-brand-kicker">Operations Console</p>
+        <h1 class="brand">FMS Admin Dashboard</h1>
+      </div>
+
+      <nav class="admin-nav-links" aria-label="Admin sections">
+        <a href="admin_dashboard.html" class="secondary nav-tab nav-tab-home">Home</a>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Carrier Management</button>
+          <div class="nav-dropdown-menu">
+            <a href="add-carrier.html">Add Carrier</a>
+            <a href="manage-carriers.html">Manage Carriers</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Flight Management</button>
+          <div class="nav-dropdown-menu">
+            <a href="add-flight.html">Add Flight</a>
+            <a href="manage-flights.html">Manage Flights</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Flight Schedule</button>
+          <div class="nav-dropdown-menu">
+            <a href="admin_schedule.html">All Schedules</a>
+            <a href="admin_schedule.html?option=add">Add Schedule</a>
+          </div>
+        </div>
+
+        <a href="admin_users.html?option=all" class="secondary nav-tab">User Management</a>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Analytics</button>
+          <div class="nav-dropdown-menu">
+            <a href="admin_analytics.html">KPI Summary</a>
+            <a href="admin_analytics.html?option=inventory">Seat Inventory</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Audit Trail</button>
+          <div class="nav-dropdown-menu">
+            <a href="admin_audit.html?option=recent">Recent Actions</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="admin-session-block">
+        <span class="session-pill"><strong id="adminName">Admin</strong></span>
+        <button id="adminLogoutBtn" type="button" class="danger">Sign Out</button>
+      </div>
+    </header>
+
+    <div id="adminMsg" class="msg"></div>
+
+    <section class="panel" style="margin-bottom:16px;">
+      <div class="landing-header">
+        <h2 class="form-title" style="margin-bottom:0;">Analytics</h2>
+        <div class="period-selector">
+          <button id="showKpiBtn" type="button" class="period-btn active">KPI Summary</button>
+          <button id="showInventoryBtn" type="button" class="period-btn">Seat Inventory</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- KPI SUMMARY SECTION -->
+    <section id="kpiSection" class="panel">
+      <h3 class="section-title" style="margin-bottom:12px;">KPI Summary</h3>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="label">Total Bookings</div><div id="analyticsTotalBookings" class="value">0</div></div>
+        <div class="kpi"><div class="label">Revenue</div><div id="analyticsRevenue" class="value">INR 0.00</div></div>
+        <div class="kpi"><div class="label">Cancelled</div><div id="analyticsCancelled" class="value">0</div></div>
+        <div class="kpi"><div class="label">Active Flights</div><div id="analyticsActiveFlights" class="value">0</div></div>
+      </div>
+    </section>
+
+    <!-- SEAT INVENTORY SECTION -->
+    <section id="inventorySection" class="panel" style="margin-top:16px; display:none;">
+      <h3 class="form-title">Real-Time Seat Inventory View</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Schedule Id</th>
+            <th>Flight Id</th>
+            <th>Route</th>
+            <th>Date</th>
+            <th>Economy</th>
+            <th>Business</th>
+            <th>Executive</th>
+          </tr>
+        </thead>
+        <tbody id="inventoryBody"></tbody>
+      </table>
+      <div class="actions">
+        <button id="backBtn" type="button" class="secondary">Back to Dashboard</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/core/storage.js"></script>
+  <script src="../js/core/security.js"></script>
+  <script src="../js/core/ui.js"></script>
+  <script src="../js/app.bootstrap.js"></script>
+  <script src="../js/modules/admin-analytics.module.js"></script>
 </body>
 </html>

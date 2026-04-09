@@ -21,6 +21,14 @@
     return departure <= new Date();
   }
 
+  function getScheduleTiming(scheduleId) {
+    try {
+      return JSON.parse(localStorage.getItem("fms_schedule_timing_" + scheduleId) || "{}");
+    } catch (error) {
+      return {};
+    }
+  }
+
   function init() {
     if (document.body.getAttribute("data-page") !== "flight-search") {
       return;
@@ -70,11 +78,17 @@ function buildAvailable(scheduleList) {
     .filter(function (s) { return s.dateOfTravel === date; })
     .map(function (s) {
       const flight = flightsById[Number(s.flightId)];
-      return flight ? { flight: flight, schedule: s } : null;
+      const scheduleTiming = getScheduleTiming(s.flightScheduleId);
+      return flight ? { flight: flight, schedule: s, scheduleTiming: scheduleTiming } : null;
     })
     .filter(Boolean)
     .filter(function (x) { return routeMatches(x.flight); })
-    .filter(function (x) { return !isPastFlightDateTime(x.schedule.dateOfTravel, x.flight.departureTime); });
+    .filter(function (x) {
+      const departure = x.scheduleTiming && x.scheduleTiming.boardingTime
+        ? x.scheduleTiming.boardingTime
+        : x.flight.departureTime;
+      return !isPastFlightDateTime(x.schedule.dateOfTravel, departure);
+    });
 }
 
 let available = buildAvailable(schedules);

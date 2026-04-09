@@ -36,24 +36,17 @@
         <div class="nav-dropdown">
           <button type="button" class="secondary nav-tab">Flight Schedule</button>
           <div class="nav-dropdown-menu">
-            <a href="admin_schedule.html?option=all">All Schedules</a>
+            <a href="admin_schedule.html">All Schedules</a>
             <a href="admin_schedule.html?option=add">Add Schedule</a>
           </div>
         </div>
 
-        <div class="nav-dropdown">
-          <button type="button" class="secondary nav-tab">User Management</button>
-          <div class="nav-dropdown-menu">
-            <a href="admin_users.html?option=all">All Users</a>
-            <a href="admin_users.html?option=active">Active Users</a>
-            <a href="admin_users.html?option=inactive">Inactive Users</a>
-          </div>
-        </div>
+        <a href="admin_users.html?option=all" class="secondary nav-tab">User Management</a>
 
         <div class="nav-dropdown">
           <button type="button" class="secondary nav-tab">Analytics</button>
           <div class="nav-dropdown-menu">
-            <a href="admin_analytics.html?option=kpi">KPI Summary</a>
+            <a href="admin_analytics.html">KPI Summary</a>
             <a href="admin_analytics.html?option=inventory">Seat Inventory</a>
           </div>
         </div>
@@ -76,17 +69,17 @@
 
     <section class="panel">
       <h2 class="form-title">Add New Flight</h2>
+      <p style="color:#718096; margin-bottom:16px; font-size:0.9rem;">
+        Note: Boarding time, arrival time and travel dates are configured in <a href="admin_schedule.html?option=add">Flight Schedule</a>.
+      </p>
       <div class="form-grid">
         <div class="form-row"><label>Carrier</label><select id="flightCarrierId"></select></div>
-        <div class="form-row"><label>Origin</label><input id="origin" placeholder="e.g., Bengaluru"></div>
-        <div class="form-row"><label>Destination</label><input id="destination" placeholder="e.g., Delhi"></div>
+        <div class="form-row"><label>Origin</label><input id="origin" placeholder="e.g., Bengaluru" maxlength="20" autocomplete="off"></div>
+        <div class="form-row"><label>Destination</label><input id="destination" placeholder="e.g., Delhi" maxlength="20" autocomplete="off"></div>
         <div class="form-row"><label>Air Fare (₹)</label><input id="airFare" type="number" placeholder="Amount"></div>
-        <div class="form-row"><label>Boarding Time</label><input id="boardingTime" type="time"></div>
-        <div class="form-row"><label>Arrival Time</label><input id="arrivalTime" type="time"></div>
-        <div class="form-row"><label>Duration (Auto)</label><input id="flightDuration" type="text" readonly></div>
-        <div class="form-row"><label>Economy Seats (≥20)</label><input id="seatEconomy" type="number" min="20"></div>
-        <div class="form-row"><label>Business Seats (≥10)</label><input id="seatBusiness" type="number" min="10"></div>
-        <div class="form-row"><label>Executive Seats (≥5)</label><input id="seatExecutive" type="number" min="5"></div>
+        <div class="form-row"><label>Economy Seats (20-100)</label><input id="seatEconomy" type="number" min="20" max="100"></div>
+        <div class="form-row"><label>Business Seats (10-40)</label><input id="seatBusiness" type="number" min="10" max="40"></div>
+        <div class="form-row"><label>Executive Seats (5-30)</label><input id="seatExecutive" type="number" min="5" max="30"></div>
       </div>
       <div class="actions">
         <button id="saveFlightBtn" type="button">Save Flight</button>

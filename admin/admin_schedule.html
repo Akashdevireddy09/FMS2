@@ -3,15 +3,141 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Flight Schedule</title>
+  <title>Flight Schedule - Admin Portal</title>
+  <link rel="stylesheet" href="../css/admin_dashboard.css">
 </head>
-<body>
-  <script>
-    (function () {
-      var params = new URLSearchParams(window.location.search);
-      var option = params.get("option") || "all";
-      window.location.replace("admin_dashboard.html?view=schedule&option=" + encodeURIComponent(option));
-    })();
-  </script>
+<body data-page="admin-schedule">
+  <div class="container">
+    <header class="topbar admin-navbar">
+      <div class="admin-brand-block">
+        <p class="admin-brand-kicker">Operations Console</p>
+        <h1 class="brand">FMS Admin Dashboard</h1>
+      </div>
+
+      <nav class="admin-nav-links" aria-label="Admin sections">
+        <a href="admin_dashboard.html" class="secondary nav-tab nav-tab-home">Home</a>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Carrier Management</button>
+          <div class="nav-dropdown-menu">
+            <a href="add-carrier.html">Add Carrier</a>
+            <a href="manage-carriers.html">Manage Carriers</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Flight Management</button>
+          <div class="nav-dropdown-menu">
+            <a href="add-flight.html">Add Flight</a>
+            <a href="manage-flights.html">Manage Flights</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Flight Schedule</button>
+          <div class="nav-dropdown-menu">
+            <a href="admin_schedule.html">All Schedules</a>
+            <a href="admin_schedule.html?option=add">Add Schedule</a>
+          </div>
+        </div>
+
+        <a href="admin_users.html?option=all" class="secondary nav-tab">User Management</a>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Analytics</button>
+          <div class="nav-dropdown-menu">
+            <a href="admin_analytics.html">KPI Summary</a>
+            <a href="admin_analytics.html?option=inventory">Seat Inventory</a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <button type="button" class="secondary nav-tab">Audit Trail</button>
+          <div class="nav-dropdown-menu">
+            <a href="admin_audit.html?option=recent">Recent Actions</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="admin-session-block">
+        <span class="session-pill"><strong id="adminName">Admin</strong></span>
+        <button id="adminLogoutBtn" type="button" class="danger">Sign Out</button>
+      </div>
+    </header>
+
+    <div id="adminMsg" class="msg"></div>
+
+    <section class="panel">
+      <h2 class="form-title">Flight Schedule Management</h2>
+
+      <!-- ADD SCHEDULE FORM -->
+      <div id="scheduleFormPanel">
+        <h3 style="margin-bottom:12px;">Add New Schedule</h3>
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="scheduleFlightId">Flight</label>
+            <select id="scheduleFlightId"></select>
+          </div>
+          <div class="form-row">
+            <label for="scheduleDate">Date of Travel</label>
+            <input id="scheduleDate" type="date">
+          </div>
+          <div class="form-row">
+            <label for="scheduleBoardingTime">Boarding Time</label>
+            <input id="scheduleBoardingTime" type="time">
+          </div>
+          <div class="form-row">
+            <label for="scheduleArrivalTime">Arrival Time</label>
+            <input id="scheduleArrivalTime" type="time">
+          </div>
+          <div class="form-row">
+            <label for="scheduleDuration">Duration (Auto)</label>
+            <input id="scheduleDuration" type="text" readonly>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="saveScheduleBtn" type="button">Save Schedule</button>
+          <button id="cancelScheduleFormBtn" type="button" class="secondary">Cancel</button>
+        </div>
+      </div>
+
+      <!-- SCHEDULE TABLE -->
+      <div id="scheduleListPanel" style="margin-top:24px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <h3>All Schedules</h3>
+          <button id="showAddScheduleBtn" type="button" class="schedule-add-btn">+ Add Schedule</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Delete</th>
+              <th>Schedule Id</th>
+              <th>Flight Id</th>
+              <th>Route</th>
+              <th>Date of Travel</th>
+              <th>Boarding Time</th>
+              <th>Arrival Time</th>
+              <th>Duration</th>
+              <th>Economy Booked</th>
+              <th>Business Booked</th>
+              <th>Executive Booked</th>
+            </tr>
+          </thead>
+          <tbody id="scheduleBody"></tbody>
+        </table>
+        <div class="actions">
+          <button id="deleteScheduleBtn" type="button" class="danger">Delete Selected Schedule(s)</button>
+          <button id="backBtn" type="button" class="secondary">Back to Dashboard</button>
+        </div>
+        <p class="footer-note">Use checkboxes to select schedules for deletion.</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/core/storage.js"></script>
+  <script src="../js/core/security.js"></script>
+  <script src="../js/core/ui.js"></script>
+  <script src="../js/app.bootstrap.js"></script>
+  <script src="../js/modules/admin-schedule.module.js"></script>
 </body>
 </html>
